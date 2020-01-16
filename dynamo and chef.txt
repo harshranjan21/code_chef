@@ -1,0 +1,87 @@
+#include<bits/stdc++.h>
+#include<cmath>
+using namespace std; 
+string findDiff(string str1, string str2) 
+{ 
+	string str = ""; 
+	int n1 = str1.length(), n2 = str2.length(); 
+	int diff = n1 - n2;  
+	int carry = 0;  
+	for (int i=n2-1; i>=0; i--) 
+	{  
+		int sub = ((str1[i+diff]-'0') - 
+				(str2[i]-'0') - 
+				carry); 
+		if (sub < 0) 
+		{ 
+			sub = sub+10; 
+			carry = 1; 
+		} 
+		else
+			carry = 0; 
+
+		str.push_back(sub + '0'); 
+	}  
+	for (int i=n1-n2-1; i>=0; i--) 
+	{ 
+		if (str1[i]=='0' && carry) 
+		{ 
+			str.push_back('9'); 
+			continue; 
+		} 
+		int sub = ((str1[i]-'0') - carry); 
+		if (i>0 || sub>0)  
+			str.push_back(sub+'0'); 
+		carry = 0; 
+	} 
+	reverse(str.begin(), str.end()); 
+	return str; 
+} 
+int main(void)
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int n;
+		int read;
+		string a,b,d,s,bb,dd;
+		cin>>n;
+		cin>>a;
+		int len_a=a.length()-1;
+		char *s_real=(char*)malloc((n+2)*sizeof(char));
+		s_real[n+1]='\0';
+		for(int i=0;i<=n;i++)
+		{
+			if(i==0)
+			{s+='2',bb+='1',dd+='1';}
+			else
+			{s+='0',bb+='0',dd+='0';}
+		}
+		int len_s=s.length()-1;
+		int no1,sum=0;
+		for(int i=len_a;i>=0;i--)
+		{
+			no1=(int)(a[i]-'0');
+			sum=no1;
+			s_real[len_s]=sum+'0';
+			len_s--;
+		}
+		for(int i=len_s;i>=0;i--)
+		{
+			s_real[i]=s[i];
+		}
+		cout<<s_real<<endl;
+		cin>>b;
+		int len_b=b.length();
+		string c=findDiff(bb,b);
+		cout<<c<<endl;
+		cin>>d;
+		int len_d=d.length();
+		string e=findDiff(dd,d);
+		cout<<e<<endl;
+		cin>>read;
+		if(read==-1)
+		break;
+	}
+}

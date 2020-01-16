@@ -1,0 +1,36 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(void)
+{
+	int t,n,var;
+	int keep;
+    cin>>t;
+    int a[126];
+    vector<int> ans(t);
+    for(int i=1;i<=t;i++)
+    {
+    	keep=0;
+    	cin>>n;
+    	string s;
+    	cin>>s;
+    	for(int j=0;j<126;j++)
+    	{
+    		a[j]=0;
+		}
+    	for(int j=0;j<n;j++)
+    	{
+    		var=s[j];
+    		if(a[var]==0)
+    		a[var]=1;
+    		else{
+    			break;
+			}
+			keep=j;
+		}
+		if(keep==(n-1))
+		cout<<0<<endl;
+		else
+		cout<<n-(keep+1)<<endl;
+	}
+
+}
